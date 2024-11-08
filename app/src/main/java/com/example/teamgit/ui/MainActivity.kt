@@ -1,4 +1,4 @@
-package com.example.teamgit
+package com.example.teamgit.ui
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
