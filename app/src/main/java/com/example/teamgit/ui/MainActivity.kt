@@ -8,15 +8,24 @@ import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
+import androidx.compose.material.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
+import androidx.compose.runtime.SideEffect
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalLayoutDirection
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.LayoutDirection
+import androidx.navigation.compose.composable
+import androidx.navigation.compose.rememberNavController
 import com.example.teamgit.di.myModules
+import com.example.teamgit.ui.features.HomeScreenUi
 import com.example.teamgit.ui.theme.TeamGitTheme
+import com.example.teamgit.ui.theme.cBackground
+import com.example.teamgit.util.MyScreens
+import com.google.accompanist.systemuicontroller.rememberSystemUiController
 import dev.burnoo.cokoin.Koin
+import dev.burnoo.cokoin.navigation.KoinNavHost
 import org.koin.android.ext.koin.androidContext
 
 class MainActivity : ComponentActivity() {
@@ -34,12 +43,39 @@ class MainActivity : ComponentActivity() {
                     }
                 ) {
                     TeamGitTheme {
+                        val uiController = rememberSystemUiController()
+                        SideEffect {
+                            uiController.setStatusBarColor(cBackground)
+                        }
 
+                        Surface(
+                            color = cBackground,
+                            modifier = Modifier.fillMaxSize()
+                        ) {
+                            TeamGitApp()
+                        }
                     }
                 }
             }
         }
     }
+}
+
+@Composable
+fun TeamGitApp() {
+
+    val navController = rememberNavController()
+    KoinNavHost(
+        navController = navController,
+        startDestination = MyScreens.HomeScreen.route
+    ) {
+
+        composable(MyScreens.HomeScreen.route) {
+            HomeScreenUi()
+        }
+
+    }
+
 }
 
 
