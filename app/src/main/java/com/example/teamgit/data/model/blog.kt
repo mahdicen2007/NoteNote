@@ -1,0 +1,20 @@
+package com.example.teamgit.data.model
+import android.os.Parcelable
+import kotlinx.parcelize.Parcelize
+
+@Parcelize
+data class Blog (
+    val _id :String ,
+    val title :String ,
+    val image :String ,
+    val content :String ,
+    val author :String ,
+    val category :String ,
+    val createdAt :String ,
+    val updatedAt :String ,
+    val __v :Int
+) :Parcelable
+
+data class BlogResponse(
+    val blogs : List<Blog>
+)
