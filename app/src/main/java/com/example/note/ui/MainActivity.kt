@@ -1,4 +1,4 @@
-package com.example.teamgit.ui
+package com.example.note.ui
 
 import android.os.Bundle
 import android.view.View
@@ -7,7 +7,6 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
 import androidx.compose.material.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
@@ -18,11 +17,11 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.LayoutDirection
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import com.example.teamgit.di.myModules
-import com.example.teamgit.ui.features.HomeScreenUi
-import com.example.teamgit.ui.theme.TeamGitTheme
-import com.example.teamgit.ui.theme.cBackground
-import com.example.teamgit.util.MyScreens
+import com.example.note.di.myModules
+import com.example.note.ui.features.HomeScreenUi
+import com.example.note.ui.theme.TeamGitTheme
+import com.example.note.ui.theme.cBackground
+import com.example.note.util.MyScreens
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
 import dev.burnoo.cokoin.Koin
 import dev.burnoo.cokoin.navigation.KoinNavHost

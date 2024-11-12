@@ -19,6 +19,6 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "TeamGit"
+rootProject.name = "Note"
 include(":app")
  

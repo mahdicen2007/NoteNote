@@ -1,4 +1,4 @@
-package com.example.teamgit.data.model
+package com.example.note.data.model
 import android.os.Parcelable
 import kotlinx.parcelize.Parcelize
 

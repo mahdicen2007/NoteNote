@@ -6,11 +6,11 @@ plugins {
 }
 
 android {
-    namespace = "com.example.teamgit"
+    namespace = "com.example.note"
     compileSdk = 34
 
     defaultConfig {
-        applicationId = "com.example.teamgit"
+        applicationId = "com.example.note"
         minSdk = 24
         targetSdk = 34
         versionCode = 1

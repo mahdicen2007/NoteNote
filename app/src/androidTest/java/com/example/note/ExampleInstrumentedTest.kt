@@ -1,4 +1,4 @@
-package com.example.teamgit
+package com.example.note
 
 import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.ext.junit.runners.AndroidJUnit4

@@ -1,4 +1,4 @@
-package com.example.teamgit.ui.theme
+package com.example.note.ui.theme
 
 import androidx.compose.material.Typography
 import androidx.compose.ui.text.TextStyle
@@ -6,7 +6,7 @@ import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.sp
-import com.example.teamgit.R
+import com.example.note.R
 
 val VazirFont = FontFamily(Font(R.font.vazir_regular))
 

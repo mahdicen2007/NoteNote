@@ -1,4 +1,4 @@
-package com.example.teamgit.ui.theme
+package com.example.note.ui.theme
 
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Shapes

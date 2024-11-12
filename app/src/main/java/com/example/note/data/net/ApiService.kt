@@ -1,9 +1,7 @@
-package com.example.teamgit.data.net
+package com.example.note.data.net
 
-import com.example.teamgit.data.model.BlogResponse
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
-import retrofit2.http.GET
 
 interface ApiService {
 

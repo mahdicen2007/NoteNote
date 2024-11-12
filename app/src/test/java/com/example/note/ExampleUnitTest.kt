@@ -1,4 +1,4 @@
-package com.example.teamgit
+package com.example.note
 
 import org.junit.Test
 
