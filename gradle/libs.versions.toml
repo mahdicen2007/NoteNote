@@ -24,8 +24,11 @@ material = "1.4.3"
 converterGson = "2.9.0"
 lifecycle-runtime-ktx = "2.6.1"
 androidx-test-ext-junit = "1.1.5"
+roomKtx = "2.4.1"
 
 [libraries]
+androidx-room-ktx = { group = "androidx.room", name = "room-ktx", version.ref = "roomKtx" }
+androidx-room-compiler = { group = "androidx.room", name = "room-compiler", version.ref = "roomKtx" }
 accompanist-pager-indicators = { module = "com.google.accompanist:accompanist-pager-indicators", version.ref = "accompanist-pager-indicators" }
 accompanist-pager = { module = "com.google.accompanist:accompanist-pager", version.ref = "accompanist-pager" }
 androidx-constraintlayout-compose = { module = "androidx.constraintlayout:constraintlayout-compose", version.ref = "constraintlayout-compose" }
