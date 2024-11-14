@@ -11,5 +11,6 @@ data class Note(
     val detail :String,
     val background :Int,
     val isImaged :Boolean,
-    val image :Int
+    val image :Int,
+    val date :String
 )

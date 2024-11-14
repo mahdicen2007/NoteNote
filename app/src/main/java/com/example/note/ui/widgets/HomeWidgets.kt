@@ -61,7 +61,7 @@ fun HomeContent(
                     style = MaterialTheme.typography.h5,
                     color = cText2
                 )
-                TextButton(onClick = {onAddNote.invoke()}) {
+                TextButton(onClick = { onAddNote.invoke() }) {
                     Text(
                         text = "برو یادداشت کن",
                         style = MaterialTheme.typography.caption,
@@ -70,7 +70,15 @@ fun HomeContent(
                 }
             }
         } else {
-
+            NoteList(
+                modifier = Modifier.constrainAs(noteList) {
+                    top.linkTo(parent.top)
+                    start.linkTo(parent.start)
+                    end.linkTo(parent.end)
+                }, data = data
+            ) {
+                // todo navigate to note Screen (2)
+            }
         }
 
     }

@@ -6,6 +6,8 @@ import androidx.lifecycle.viewModelScope
 import com.example.note.data.repo.HomeRepository
 import com.example.note.data.room.Note
 import com.example.note.util.prepNote
+import com.example.note.util.prepNote1
+import com.example.note.util.prepNote2
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -23,6 +25,9 @@ class HomeViewModel(
     val isLoading: StateFlow<Boolean> = _isLoading
 
     init {
+        insertEx(prepNote)
+        insertEx(prepNote1)
+        insertEx(prepNote2)
         getAllNotes()
     }
 
