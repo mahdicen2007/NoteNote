@@ -23,7 +23,6 @@ class HomeViewModel(
     val isLoading: StateFlow<Boolean> = _isLoading
 
     init {
-        insertEx(prepNote)
         getAllNotes()
     }
 
