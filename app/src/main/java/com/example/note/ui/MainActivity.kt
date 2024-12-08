@@ -21,6 +21,9 @@ import com.example.note.di.myModules
 import com.example.note.ui.features.HomeScreenUi
 import com.example.note.ui.theme.TeamGitTheme
 import com.example.note.ui.theme.cBackground
+import com.example.note.ui.theme.cText1
+import com.example.note.ui.theme.cWhite
+import com.example.note.ui.widgets.HomeToolbar
 import com.example.note.util.MyScreens
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
 import dev.burnoo.cokoin.Koin
@@ -30,7 +33,6 @@ import org.koin.android.ext.koin.androidContext
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        enableEdgeToEdge()
         window.decorView.layoutDirection = View.LAYOUT_DIRECTION_RTL
         window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE)
         setContent {
@@ -44,7 +46,7 @@ class MainActivity : ComponentActivity() {
                     TeamGitTheme {
                         val uiController = rememberSystemUiController()
                         SideEffect {
-                            uiController.setStatusBarColor(cBackground)
+                            uiController.setStatusBarColor(cWhite)
                         }
 
                         Surface(
@@ -82,6 +84,8 @@ fun TeamGitApp() {
 @Composable
 fun GreetingPreview() {
     TeamGitTheme {
-
+        HomeToolbar(
+            {}
+        ) { }
     }
 }
