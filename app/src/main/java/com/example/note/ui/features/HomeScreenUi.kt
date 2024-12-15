@@ -9,6 +9,7 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.material.CircularProgressIndicator
+import androidx.compose.material.DrawerValue
 import androidx.compose.material.Scaffold
 import androidx.compose.material.rememberScaffoldState
 import androidx.compose.runtime.Composable
@@ -21,10 +22,13 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.note.ui.theme.cBackground
+import com.example.note.ui.widgets.DrawerBody
 import com.example.note.ui.widgets.HomeContent
+import com.example.note.ui.widgets.HomeDrawer
 import com.example.note.ui.widgets.HomeToolbar
 import dev.burnoo.cokoin.navigation.getNavController
 import dev.burnoo.cokoin.viewmodel.getViewModel
+import kotlinx.coroutines.launch
 import kotlin.math.log
 
 @SuppressLint("UnusedMaterialScaffoldPaddingParameter")
@@ -50,13 +54,26 @@ fun HomeScreenUi() {
         topBar = {
             HomeToolbar(
                 onSearchClicked = {},
-                onDrawerCLicked = {}
+                onDrawerCLicked = {
+                    scope.launch {
+                        scaffoldState.drawerState.open()
+                    }
+                }
             )
         },
         modifier = Modifier.fillMaxSize(),
         drawerGesturesEnabled = true, // to open drawer by finger without tapping any button,
         drawerContent = {
+            HomeDrawer {
+                scope.launch {
+                    if(scaffoldState.drawerState.currentValue == DrawerValue.Open){
+                        scaffoldState.drawerState.close()
+                    } else {
+                        activity?.finish()
+                    }
 
+                }
+            }
         },
         drawerElevation = 4.dp,
         drawerBackgroundColor = cBackground
