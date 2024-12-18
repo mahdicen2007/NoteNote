@@ -11,7 +11,9 @@ import androidx.compose.animation.slideOutVertically
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -24,6 +26,7 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.Icon
@@ -35,6 +38,7 @@ import androidx.compose.material.TextButton
 import androidx.compose.material.TextFieldDefaults
 import androidx.compose.material.TopAppBar
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableFloatStateOf
@@ -44,11 +48,15 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.rotate
 import androidx.compose.ui.graphics.BlendMode.Companion.Color
+import androidx.compose.ui.platform.LocalLayoutDirection
+import androidx.compose.ui.platform.LocalUriHandler
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.unit.LayoutDirection
 import androidx.compose.ui.unit.dp
 import androidx.constraintlayout.compose.ConstraintLayout
 import com.example.note.R
@@ -57,7 +65,9 @@ import com.example.note.ui.theme.Shapes
 import com.example.note.ui.theme.cArrow
 import com.example.note.ui.theme.cBackground
 import com.example.note.ui.theme.cPrimary
+import com.example.note.ui.theme.cText1
 import com.example.note.ui.theme.cText2
+import com.example.note.ui.theme.cText3
 import com.example.note.ui.theme.cText5
 import com.example.note.util.FadeInOutWidget
 import kotlinx.coroutines.delay
@@ -333,21 +343,150 @@ private fun DrawerMenuItem(
         ) {
 
             if (text == "اطلاعات توسعه دهندگان") {
-//                DevelopersIds()
-                Text("سلام یه همه دوستان گلم")
+                DevelopersIds()
             } else {
-                Text("سلام یه همه دوستان گلم")
-//                AppInfo(
-//                    modifier = Modifier.padding(
-//                        top = 8.dp,
-//                        start = 18.dp,
-//                        end = 25.dp,
-//                        bottom = 16.dp
-//                    )
-//                )
+                AppInfo(
+                    modifier = Modifier.padding(
+                        top = 8.dp,
+                        start = 18.dp,
+                        end = 25.dp,
+                        bottom = 16.dp
+                    )
+                )
             }
 
         }
+
+    }
+}
+
+@Composable
+fun DevelopersIds(){
+    Column {
+        Developer(R.drawable.developer , "مهدی طارمیلر" , "برنامه نویس اندروید" , "@mahdicen_")
+    }
+}
+
+@Composable
+private fun Developer(
+    iconDrawableId: Int,
+    title: String,
+    detail: String,
+    page: String
+) {
+    val interactionSource = remember { MutableInteractionSource() }
+    val uriHandler = LocalUriHandler.current
+
+    ConstraintLayout(modifier = Modifier
+        .fillMaxWidth()
+        .padding(bottom = 18.dp)
+        .clickable(
+            interactionSource = interactionSource,
+            indication = null
+        ) {
+            uriHandler.openUri("https://www.instagram.com/" + page.substring(1))
+        }) {
+
+        val (nameDeveloper, imgInsta, details) = createRefs()
+
+        Text(
+            modifier = Modifier
+                .constrainAs(nameDeveloper) {
+                    top.linkTo(imgInsta.top)
+                    start.linkTo(imgInsta.end)
+                }
+                .padding(start = 18.dp),
+            text = title,
+            color = cText1,
+            style = MaterialTheme.typography.h4
+        )
+
+        CompositionLocalProvider(LocalLayoutDirection provides LayoutDirection.Ltr) {
+
+            Text(
+                modifier = Modifier
+                    .constrainAs(details) {
+                        top.linkTo(nameDeveloper.bottom)
+                        start.linkTo(imgInsta.end)
+                    }
+                    .padding(end = 18.dp, top = 2.dp),
+                text = detail + " - " + page,
+                color = cText3,
+                style = MaterialTheme.typography.overline
+            )
+
+
+        }
+
+        Box(modifier = Modifier
+            .constrainAs(imgInsta) {
+                top.linkTo(parent.top)
+                bottom.linkTo(parent.bottom)
+                start.linkTo(parent.start)
+            }
+            .padding(start = 16.dp), contentAlignment = Alignment.Center)
+        {
+
+            Image(
+                modifier = Modifier.size(52.dp),
+                painter = painterResource(id = R.drawable.ic_ring),
+                contentDescription = null
+            )
+
+            Image(
+                modifier = Modifier
+                    .size(45.dp)
+                    .clip(CircleShape),
+                painter = painterResource(id = iconDrawableId),
+                contentDescription = null
+            )
+
+        }
+    }
+}
+
+@Composable
+fun AppInfo(modifier: Modifier) {
+    val uriHandler = LocalUriHandler.current
+
+    val appInfo = """
+        یک برنامه یادداشت ساده با رابط کاربری ساده
+        هدف از ساخت این برنامه تنها یک نمونه کار بر روی صفحه توسعه دهنده این برنامست
+        
+        ممنون میشم یه سر به گیت هاب این پروژه بندازید :)
+        
+        در ضمن این برنامه اپن سورس و قابل توسعه است.
+    """.trimIndent()
+
+    Column(modifier = modifier) {
+
+        Text(
+            text = appInfo,
+            textAlign = TextAlign.Justify,
+            style = MaterialTheme.typography.h4
+        )
+
+        Text(
+            modifier = Modifier
+                .padding(start = 18.dp, top = 10.dp)
+                .clickable {
+                    uriHandler.openUri("https://github.com/mahdicen2007/NoteNote")
+                },
+            text = "صفحه گیت هاب پروژه",
+            color = cPrimary,
+            style = MaterialTheme.typography.h4
+        )
+
+        Text(
+            modifier = Modifier
+                .padding(start = 18.dp, top = 10.dp)
+                .clickable {
+                    uriHandler.openUri("")
+                },
+            text = "نوت نوت در کافه بازار",
+            color = cPrimary,
+            style = MaterialTheme.typography.h4
+        )
 
     }
 }
